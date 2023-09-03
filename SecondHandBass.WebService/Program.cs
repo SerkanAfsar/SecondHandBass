@@ -1,12 +1,27 @@
+using SecondHandBass.BusinessLayer.Configurations;
+using SecondHandBass.DataAccessLayer.DataContexts;
 using SecondHandBass.WebService.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddControllers().AddNewtonsoftJson(opt =>
+{
+    opt.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+    opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Error;
+}).ConfigureApiBehaviorOptions(opt =>
+{
+    opt.SuppressModelStateInvalidFilter = true;
+});
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddDbContext<AppDbContext>();
+
+builder.Services.ConfigureConstantServices();
+builder.Services.ConfigureRespositories();
+builder.Services.ConfigureServices();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();

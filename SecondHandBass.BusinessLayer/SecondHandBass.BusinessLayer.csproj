@@ -8,11 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SecondHandBass.Core\SecondHandBass.Core.csproj" />
     <ProjectReference Include="..\SecondHandBass.DataAccessLayer\SecondHandBass.DataAccessLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CustomValidations\" />
   </ItemGroup>
 
 </Project>

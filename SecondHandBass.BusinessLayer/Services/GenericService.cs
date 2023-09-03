@@ -5,6 +5,7 @@ using SecondHandBass.Core.DTOs.ResponseDtos;
 using SecondHandBass.Core.Helpers;
 using SecondHandBass.Core.Repositories;
 using SecondHandBass.Core.Services;
+using SecondHandBass.Core.UnitOfWorks;
 using System.Linq.Expressions;
 
 namespace SecondHandBass.BusinessLayer.Services
@@ -13,12 +14,14 @@ namespace SecondHandBass.BusinessLayer.Services
     {
         private readonly IGenericRepository<TEntity> genericRepository;
         private readonly IMapper mapper;
+        private readonly IUnitOfWork unitOfWork;
 
 
-        public GenericService(IGenericRepository<TEntity> genericRepository, IMapper mapper)
+        public GenericService(IGenericRepository<TEntity> genericRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             this.genericRepository = genericRepository;
             this.mapper = mapper;
+            this.unitOfWork = unitOfWork;
         }
 
         public Task<ResponseResult<TResponseDto>> AddEntity(TRequestDto entity)
